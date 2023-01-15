@@ -1,22 +1,16 @@
-## Publishing
+# force-bind
 
-Once all `TODO` notes have been updated & your new module is ready to be shared, all that's left to do is decide its new version &mdash; AKA, do the changes consitute a `patch`, `minor`, or `major` release?
+## Do not use this library it was made as a joke
 
-Once decided, you can run the following:
+```js
+import { forceBind } from "force-bind";
 
-```sh
-$ npm version <patch|minor|major> && git push origin master --tags && npm publish
-# Example:
-# npm version patch && git push origin master --tags && npm publish
+const arrowFn = (a) => a + this.b;
+const thisCtx = {
+    b: 2,
+};
+
+const boundArrowFn = forceBind(arrowFn, thisCtx);
+
+boundArrowFn(1); // returns 3
 ```
-
-This command sequence will:
-
--   version your module, updating the `package.json` "version"
--   create and push a `git` tag (matching the new version) to your repository
--   build your module (via the `prepublishOnly` script)
--   publish the module to the npm registry
-
-## License
-
-MIT © [Juan de Urtubey](https://jdeurt.xyz)
